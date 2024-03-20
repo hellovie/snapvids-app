@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     } else if (phone.length > 10) {
       return showAlertDialog(
         context: context,
-        message: 'The phone number you entered is',
+        message: 'The phone number you entered is $phone',
       );
     }
   }

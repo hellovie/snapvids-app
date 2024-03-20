@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/theme/dark_theme.dart';
 import 'package:snapvids_app/common/theme/light_theme.dart';
-
-import 'feature/auth/pages/user_info_page.dart';
+import 'package:snapvids_app/feature/welcome/pages/welcome_page.dart';
 
 void main() {
   runApp(const SnapvidsApp());
@@ -19,7 +19,8 @@ class SnapvidsApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const UserInfoPage(),
+      home: const WelcomePage(),
+      onGenerateRoute: Routes.onGenerateRoute,
     );
   }
 }

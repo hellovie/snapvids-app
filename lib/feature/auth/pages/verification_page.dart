@@ -4,7 +4,14 @@ import 'package:snapvids_app/common/widgets/custom_icon_button.dart';
 import 'package:snapvids_app/feature/auth/widgets/custom_text_field.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
+  final String verificationId;
+  final String phoneNumber;
+
+  const VerificationPage({
+    super.key,
+    required this.verificationId,
+    required this.phoneNumber,
+  });
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
