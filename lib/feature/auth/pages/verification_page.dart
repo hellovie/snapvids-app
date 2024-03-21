@@ -1,39 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/widgets/custom_icon_button.dart';
 import 'package:snapvids_app/feature/auth/widgets/custom_text_field.dart';
 
-class VerificationPage extends StatefulWidget {
-  final String verificationId;
+class VerificationPage extends ConsumerWidget {
+  final String smsCodeId;
   final String phoneNumber;
 
   const VerificationPage({
     super.key,
-    required this.verificationId,
+    required this.smsCodeId,
     required this.phoneNumber,
   });
 
-  @override
-  State<VerificationPage> createState() => _VerificationPageState();
-}
-
-class _VerificationPageState extends State<VerificationPage> {
-  late TextEditingController codeController;
-
-  @override
-  void initState() {
-    codeController = TextEditingController();
-    super.initState();
+  void verifySmsCode(
+    BuildContext context,
+    WidgetRef ref,
+    String smsCode,
+  ) {
+    // Todo：验证短信验证码
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      Routes.userInfo,
+      (route) => false,
+    );
   }
 
   @override
-  void dispose() {
-    codeController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
@@ -88,8 +83,11 @@ class _VerificationPageState extends State<VerificationPage> {
                 fontSize: 30,
                 autoFocus: true,
                 keyboardType: TextInputType.number,
-                controller: codeController,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  if (value.length == 6) {
+                    return verifySmsCode(context, ref, value);
+                  }
+                },
               ),
             ),
             const SizedBox(height: 20),
