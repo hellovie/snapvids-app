@@ -17,6 +17,9 @@ dependencies:
   flutter_riverpod: ^2.4.10
 
 flutter_native_splash:
+  android: true
+  ios: true
+  web: false
   color: "#FFFFFF"
   color_dark: "#0C0F14"
   image: assets/images/splash_light.png
