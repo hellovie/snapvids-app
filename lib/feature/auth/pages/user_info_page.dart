@@ -2,9 +2,11 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
 import 'package:snapvids_app/common/helper/show_alert_dialog.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/utils/coloors.dart';
 import 'package:snapvids_app/common/widgets/custom_elevated_button.dart';
 import 'package:snapvids_app/common/widgets/custom_icon_button.dart';
@@ -13,16 +15,36 @@ import 'package:snapvids_app/feature/auth/widgets/custom_text_field.dart';
 
 import 'image_picker_page.dart';
 
-class UserInfoPage extends StatefulWidget {
+class UserInfoPage extends ConsumerStatefulWidget {
   const UserInfoPage({super.key});
 
   @override
-  State<UserInfoPage> createState() => _UserInfoPageState();
+  ConsumerState<UserInfoPage> createState() => _UserInfoPageState();
 }
 
-class _UserInfoPageState extends State<UserInfoPage> {
+class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   File? imageCamera;
   Uint8List? imageGallery;
+
+  late TextEditingController nicknameController;
+
+  saveUserData() {
+    String nickname = nicknameController.text;
+
+    if (nickname.isEmpty) {
+      return showAlertDialog(context: context, message: 'Please provide a nickname');
+    } else if (nickname.length < 2 || nickname.length > 20) {
+      return showAlertDialog(
+        context: context,
+        message: 'A nickname length should be between 2-20',
+      );
+    }
+    // Todo: 保存用户的注册信息
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      Routes.home,
+      (route) => false,
+    );
+  }
 
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
@@ -85,7 +107,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
       },
     );
   }
-  
+
   pickImageFromCamera() async {
     Navigator.of(context).pop();
     try {
@@ -94,7 +116,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         imageCamera = File(image!.path);
         imageGallery == null;
       });
-    } catch(ex) {
+    } catch (ex) {
       showAlertDialog(context: context, message: ex.toString());
     }
   }
@@ -123,6 +145,18 @@ class _UserInfoPageState extends State<UserInfoPage> {
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    nicknameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nicknameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -188,9 +222,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
             Row(
               children: [
                 const SizedBox(width: 20),
-                const Expanded(
+                Expanded(
                   child: CustomTextField(
-                    hintText: 'Type your name here',
+                    controller: nicknameController,
+                    hintText: 'Type your nickname here',
                     textAlign: TextAlign.left,
                     autoFocus: true,
                   ),
@@ -208,7 +243,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
-        onPressed: () {},
+        onPressed: saveUserData,
         text: 'NEXT',
         buttonWidth: 90,
       ),

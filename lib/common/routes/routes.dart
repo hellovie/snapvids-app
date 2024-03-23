@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapvids_app/feature/auth/pages/login_page.dart';
 import 'package:snapvids_app/feature/auth/pages/user_info_page.dart';
 import 'package:snapvids_app/feature/auth/pages/verification_page.dart';
+import 'package:snapvids_app/feature/home/home_page.dart';
 import 'package:snapvids_app/feature/welcome/pages/welcome_page.dart';
 
 class Routes {
@@ -9,6 +10,7 @@ class Routes {
   static const String login = 'login';
   static const String verification = 'verification';
   static const String userInfo = 'user-info';
+  static const String home = 'home';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -31,6 +33,10 @@ class Routes {
       case userInfo:
         return MaterialPageRoute(
           builder: (context) => const UserInfoPage(),
+        );
+      case home:
+        return MaterialPageRoute(
+          builder: (context) => const HomePage(),
         );
       default:
         return MaterialPageRoute(
