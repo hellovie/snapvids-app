@@ -34,7 +34,8 @@ class LanguageButton extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   const Text(
-                    'App language',
+                    // 'App language',
+                    '语言设置',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -51,22 +52,23 @@ class LanguageButton extends StatelessWidget {
                 groupValue: true,
                 onChanged: (value) {},
                 activeColor: Coloors.redDark,
-                title: const Text("English"),
+                title: const Text("简体中文"),
                 subtitle: Text(
-                  "(United States)",
+                  "（中国）",
                   style: TextStyle(
                     color: context.theme.greyColor,
                   ),
                 ),
               ),
               RadioListTile(
+                // 暂时不可用
                 value: true,
-                groupValue: false,
-                onChanged: (value) {},
-                activeColor: Coloors.redDark,
-                title: const Text("简体中文"),
+                groupValue: null,
+                onChanged: null,
+                activeColor: Colors.transparent,
+                title: const Text("English"),
                 subtitle: Text(
-                  "（中国）",
+                  "(United States)",
                   style: TextStyle(
                     color: context.theme.greyColor,
                   ),
@@ -104,7 +106,8 @@ class LanguageButton extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Text('English'),
+              Text('简体中文'),
+              // Text('English'),
               SizedBox(
                 width: 10,
               ),

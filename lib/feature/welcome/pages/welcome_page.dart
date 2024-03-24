@@ -47,7 +47,8 @@ class WelcomePage extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    'Welcome to Snapvids',
+                    // 'Welcome to Snapvids',
+                    '欢迎来到 Snapvids',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -56,7 +57,8 @@ class WelcomePage extends StatelessWidget {
                   const PrivacyAndTerms(),
                   CustomElevatedButton(
                     onPressed: () => navigateToLoginPage(context),
-                    text: 'AGREE AND CONTINUE',
+                    // text: 'AGREE AND CONTINUE',
+                    text: '同意并继续',
                   ),
                   const SizedBox(
                     height: 50,

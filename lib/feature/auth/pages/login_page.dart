@@ -26,21 +26,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final countryName = countryNameController.text;
     final countryCode = countryCodeController.text;
 
+    if (countryCode != '86') {
+      return showAlertDialog(
+        context: context,
+        message: '仅支持中国大陆的手机号码',
+      );
+    }
+
     if (phoneNumber.isEmpty) {
       return showAlertDialog(
         context: context,
-        message: 'Please enter your phone number',
+        // message: 'Please enter your phone number',
+        message: '请输入您的电话号码',
       );
-    } else if (phoneNumber.length < 9) {
+    } else if (phoneNumber.length < 11) {
       return showAlertDialog(
         context: context,
-        message:
-            "The phone number your entered is too short for the country: $countryName.\n\nInclude your area code if you haven't",
+        // message:
+        //     "The phone number your entered is too short for the country: $countryName.\n\nInclude your area code if you haven't",
+        message: '您输入的电话号码对于$countryName来说太短了。\n\n如果您还未包含，请添加您的区号。',
       );
-    } else if (phoneNumber.length > 10) {
+    } else if (phoneNumber.length > 11) {
       return showAlertDialog(
         context: context,
-        message: 'The phone number you entered is too long for the country: $countryName',
+        // message: 'The phone number you entered is too long for the country: $countryName',
+        message: '您输入的电话号码对于$countryName来说太长了。',
       );
     }
 
@@ -69,7 +79,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             Icons.language,
             color: Coloors.redDark,
           ),
-          hintText: 'Search country code or name',
+          // hintText: 'Search country code or name',
+          hintText: '搜索国家/地区代码或名称',
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: context.theme.greyColor!.withOpacity(0.2),
@@ -112,7 +123,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
-          'Enter your phone number',
+          // 'Enter your phone number',
+          '输入您的电话号码',
           style: TextStyle(
             color: context.theme.authAppbarTextColor,
           ),
@@ -132,19 +144,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             child: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text: 'Snapvids will need to verify you phone number. ',
+                // text: 'Snapvids will need to verify you phone number. ',
+                text: 'Snapvids 需要验证您的电话号码。',
                 style: TextStyle(
                   color: context.theme.greyColor,
                   height: 1.5,
                 ),
-                children: [
-                  TextSpan(
-                    text: "What's my number?",
-                    style: TextStyle(
-                      color: context.theme.blueColor,
-                    ),
-                  ),
-                ],
+                // children: [
+                //   TextSpan(
+                //     // text: "What's my number?",
+                //     text: "我的电话号码是多少？",
+                //     style: TextStyle(
+                //       color: context.theme.blueColor,
+                //     ),
+                //   ),
+                // ],
               ),
             ),
           ),
@@ -180,7 +194,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   child: CustomTextField(
                     onTap: () {},
                     controller: phoneNumberController,
-                    hintText: 'phone number',
+                    // hintText: 'phone number',
+                    hintText: '手机号码',
                     textAlign: TextAlign.left,
                     keyboardType: TextInputType.number,
                   ),
@@ -190,7 +205,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Carrier charges may apply',
+            // 'Carrier charges may apply',
+            '运营商可能会收取费用',
             style: TextStyle(
               color: context.theme.greyColor,
             ),
@@ -200,7 +216,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
         onPressed: sendCodeToPhone,
-        text: 'NEXT',
+        // text: 'NEXT',
+        text: '下一步',
         buttonWidth: 90,
       ),
     );

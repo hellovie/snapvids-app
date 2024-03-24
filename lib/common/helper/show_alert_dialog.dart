@@ -22,7 +22,8 @@ showAlertDialog({
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: Text(
-              btnText ?? "OK",
+              // btnText ?? "OK",
+              btnText ?? "确定",
               style: TextStyle(
                 color: context.theme.splashTopBgColor,
               ),

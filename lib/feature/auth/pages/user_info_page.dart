@@ -32,11 +32,13 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
     String nickname = nicknameController.text;
 
     if (nickname.isEmpty) {
-      return showAlertDialog(context: context, message: 'Please provide a nickname');
+      // return showAlertDialog(context: context, message: 'Please provide a nickname');
+      return showAlertDialog(context: context, message: '请输入您的昵称');
     } else if (nickname.length < 2 || nickname.length > 20) {
       return showAlertDialog(
         context: context,
-        message: 'A nickname length should be between 2-20',
+        // message: 'A nickname length should be between 2-20',
+        message: '昵称长度应在2至20个字符之间',
       );
     }
     // Todo: 保存用户的注册信息
@@ -58,7 +60,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               children: [
                 const SizedBox(width: 20),
                 const Text(
-                  'Profile photo',
+                  // 'Profile photo',
+                  '设置个人头像',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -79,7 +82,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 imagePickerIcon(
                   onTap: pickImageFromCamera,
                   icon: Icons.camera_alt_rounded,
-                  text: 'Camera',
+                  // text: 'Camera',
+                  text: '相机',
                 ),
                 const SizedBox(width: 15),
                 imagePickerIcon(
@@ -97,7 +101,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                     });
                   },
                   icon: Icons.photo_camera_back_rounded,
-                  text: 'Gallery',
+                  // text: 'Gallery',
+                  text: '相册',
                 ),
               ],
             ),
@@ -166,7 +171,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Text(
-          'Profile info',
+          // 'Profile info',
+          '设置个人信息',
           style: TextStyle(
             color: context.theme.authAppbarTextColor,
           ),
@@ -178,7 +184,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         child: Column(
           children: [
             Text(
-              'Please provide your name and an optional profile photo',
+              // 'Please provide your name and an optional profile photo',
+              '请输入您的昵称，并设置个人头像',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: context.theme.greyColor,
@@ -225,7 +232,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 Expanded(
                   child: CustomTextField(
                     controller: nicknameController,
-                    hintText: 'Type your nickname here',
+                    // hintText: 'Type your nickname here',
+                    hintText: '在此处输入您的昵称',
                     textAlign: TextAlign.left,
                     autoFocus: true,
                   ),
@@ -244,7 +252,8 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
         onPressed: saveUserData,
-        text: 'NEXT',
+        // text: 'NEXT',
+        text: '下一步',
         buttonWidth: 90,
       ),
     );

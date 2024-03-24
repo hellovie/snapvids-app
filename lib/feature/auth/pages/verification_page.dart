@@ -34,7 +34,8 @@ class VerificationPage extends ConsumerWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
         title: Text(
-          'Verify your number',
+          // 'Verify your number',
+          '验证您的电话号码',
           style: TextStyle(
             color: context.theme.authAppbarTextColor,
           ),
@@ -61,16 +62,18 @@ class VerificationPage extends ConsumerWidget {
                     height: 1.5,
                   ),
                   children: [
-                    const TextSpan(
-                      text:
-                          "You've tried to register +2520912345678. before requesting an SMS or call with your code. ",
-                    ),
                     TextSpan(
-                      text: 'Wrong number?',
-                      style: TextStyle(
-                        color: context.theme.blueColor,
-                      ),
+                      text:
+                          // "You've tried to register +2520912345678. before requesting an SMS or call with your code. ",
+                          "已发送短信验证码到 $phoneNumber",
                     ),
+                    // TextSpan(
+                    //   // text: 'Wrong number?',
+                    //   text: '输入错误的手机号码？',
+                    //   style: TextStyle(
+                    //     color: context.theme.blueColor,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -92,7 +95,8 @@ class VerificationPage extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Enter 6-digit code',
+              // 'Enter 6-digit code',
+              '输入6位数字的验证码',
               style: TextStyle(
                 color: context.theme.greyColor,
               ),
@@ -103,7 +107,8 @@ class VerificationPage extends ConsumerWidget {
                 Icon(Icons.message, color: context.theme.greyColor),
                 const SizedBox(width: 20),
                 Text(
-                  'Resend SMS',
+                  // 'Resend SMS',
+                  '重新发送短信',
                   style: TextStyle(
                     color: context.theme.greyColor,
                   ),
@@ -115,18 +120,18 @@ class VerificationPage extends ConsumerWidget {
               color: context.theme.blueColor!.withOpacity(0.2),
             ),
             const SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.phone, color: context.theme.greyColor),
-                const SizedBox(width: 20),
-                Text(
-                  'Call Me',
-                  style: TextStyle(
-                    color: context.theme.greyColor,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Icon(Icons.phone, color: context.theme.greyColor),
+            //     const SizedBox(width: 20),
+            //     Text(
+            //       // 'Call Me',
+            //       style: TextStyle(
+            //         color: context.theme.greyColor,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
