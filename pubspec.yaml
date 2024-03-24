@@ -17,6 +17,7 @@ dependencies:
   flutter_riverpod: ^2.4.10
   image_picker: ^1.0.7
   photo_manager: ^3.0.0
+  dio: ^5.4.1
 
 flutter_native_splash:
   android: true
