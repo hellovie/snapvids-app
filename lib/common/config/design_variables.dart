@@ -1,6 +1,5 @@
 class DesignVariables {
   /// 边框圆角
-  static const double borderRadiusDefault = borderRadiusMedium;
   static const double borderRadiusNone = 0;
   static const double borderRadiusMini = 2;
   static const double borderRadiusSmall = 4;
@@ -9,7 +8,6 @@ class DesignVariables {
   static const double borderRadiusLarger = 32;
 
   /// 间距大小
-  static const double spaceDefault = spaceMedium;
   static const double spaceNone = 0;
   static const double spaceMini = 2;
   static const double spaceSmall = 4;
@@ -19,14 +17,12 @@ class DesignVariables {
   static const double spaceExtraLarge = 24;
 
   /// 边框大小
-  static const double borderDefault = borderSmall;
   static const double borderNone = 0;
   static const double borderSmall = 1;
   static const double borderMedium = 2;
   static const double borderLarge = 3;
 
   /// 尺寸大小
-  static const double sizeDefault = sizeSmall;
   static const double sizeMini = 16;
   static const double sizeSmall = 20;
   static const double sizeMedium = 24;
