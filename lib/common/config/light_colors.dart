@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 class LightColors {
+  /// 主题色
+  static const Color primary = Color(0xFFFF4272);
+  static const Color secondary = Color(0xFF6495ED);
+
   /// 边框颜色
   static const Color border_1 = Color(0xFFF2F3F5);
   static const Color border_2 = Color(0xFFE5E6EB);
@@ -14,18 +18,16 @@ class LightColors {
   static const Color fill_4 = Color(0xFFC9CDD4);
 
   /// 文字颜色
-  static const Color text_1 = Color(0xFF1D2129);
-  static const Color text_2 = Color(0xFF3E5969);
-  static const Color text_3 = Color(0xFF86909C);
-  static const Color text_4 = Color(0xFFC9CDD4);
+  static const Color text_1 = Color(0xFF212121);
+  static const Color text_2 = Color(0xFF757575);
+  static const Color text_3 = Color(0xFF9E9E9E);
+  static const Color text_4 = Color(0xFFE0E0E0);
 
   /// 背景颜色
   static const Color background_1 = Color(0xFFFFFFFF);
-  static const Color background_2 = Color(0xFFFFFFFF);
-  static const Color background_3 = Color(0xFFFFFFFF);
-  static const Color background_4 = Color(0xFFFFFFFF);
-  static const Color background_5 = Color(0xFFFFFFFF);
-  static const Color whiteBackground = Color(0xFFFFFFFF);
+  static const Color background_2 = Color(0xFFF5F5F5);
+  static const Color background_3 = Color(0xFFE8E8E8);
+  static const Color background_4 = Color(0xFFE0E0E0);
 
   /// 浪漫红
   static const Color red_1 = Color(0xFFFFECE8);
