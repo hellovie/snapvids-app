@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snapvids_app/common/config/dark_colors.dart';
 import 'package:snapvids_app/common/config/light_colors.dart';
-import 'package:snapvids_app/common/utils/coloors.dart';
 
 extension ExtendedTheme on BuildContext {
   CustomThemeExtension get theme {
@@ -11,14 +10,6 @@ extension ExtendedTheme on BuildContext {
 
 class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   static const lightMode = CustomThemeExtension(
-    splashTopBgColor: Coloors.redLight,
-    greyColor: Coloors.greyLight,
-    blueColor: Coloors.blueLight,
-    langBtnBgColor: Color(0xFFF7F8F1),
-    langBtnHighlightColor: Color(0xFFE8E8ED),
-    authAppbarTextColor: Coloors.redLight,
-    photoIconBgColor: Color(0xFFF0F2F3),
-    photoIconColor: Color(0xFF9DAAB3),
     border_1: LightColors.border_1,
     border_2: LightColors.border_2,
     border_3: LightColors.border_3,
@@ -178,14 +169,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   );
 
   static const darkMode = CustomThemeExtension(
-    splashTopBgColor: Coloors.redDark,
-    greyColor: Coloors.greyDark,
-    blueColor: Coloors.blueDark,
-    langBtnBgColor: Color(0xFF182229),
-    langBtnHighlightColor: Color(0xFF09141A),
-    authAppbarTextColor: Coloors.redDark,
-    photoIconBgColor: Color(0xFF283339),
-    photoIconColor: Color(0xFF61717B),
     border_1: DarkColors.border_1,
     border_2: DarkColors.border_2,
     border_3: DarkColors.border_3,
@@ -343,16 +326,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     gray_9: DarkColors.gray_9,
     gray_10: DarkColors.gray_10,
   );
-
-  /// Todo: 待删除
-  final Color? splashTopBgColor;
-  final Color? greyColor;
-  final Color? blueColor;
-  final Color? langBtnBgColor;
-  final Color? langBtnHighlightColor;
-  final Color? authAppbarTextColor;
-  final Color? photoIconBgColor;
-  final Color? photoIconColor;
 
   /// 边框颜色
   final Color? border_1;
@@ -547,14 +520,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   final Color? gray_10;
 
   const CustomThemeExtension({
-    this.splashTopBgColor,
-    this.greyColor,
-    this.blueColor,
-    this.langBtnBgColor,
-    this.langBtnHighlightColor,
-    this.authAppbarTextColor,
-    this.photoIconBgColor,
-    this.photoIconColor,
     this.border_1,
     this.border_2,
     this.border_3,
@@ -715,14 +680,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
 
   @override
   ThemeExtension<CustomThemeExtension> copyWith({
-    Color? splashTopBgColor,
-    Color? greyColor,
-    Color? blueColor,
-    Color? langBtnBgColor,
-    Color? langBtnHighlightColor,
-    Color? authAppbarTextColor,
-    Color? photoIconBgColor,
-    Color? photoIconColor,
     Color? border_1,
     Color? border_2,
     Color? border_3,
@@ -881,14 +838,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     Color? gray_10,
   }) {
     return CustomThemeExtension(
-      splashTopBgColor: splashTopBgColor ?? this.splashTopBgColor,
-      greyColor: greyColor ?? this.greyColor,
-      blueColor: blueColor ?? this.blueColor,
-      langBtnBgColor: langBtnBgColor ?? this.langBtnBgColor,
-      langBtnHighlightColor: langBtnHighlightColor ?? this.langBtnHighlightColor,
-      authAppbarTextColor: authAppbarTextColor ?? this.authAppbarTextColor,
-      photoIconBgColor: photoIconBgColor ?? this.photoIconBgColor,
-      photoIconColor: photoIconColor ?? this.photoIconColor,
       border_1: border_1 ?? this.border_1,
       border_2: border_2 ?? this.border_2,
       border_3: border_3 ?? this.border_3,
@@ -1052,14 +1001,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   ThemeExtension<CustomThemeExtension> lerp(ThemeExtension<CustomThemeExtension>? other, double t) {
     if (other is! CustomThemeExtension) return this;
     return CustomThemeExtension(
-      splashTopBgColor: Color.lerp(splashTopBgColor, other.splashTopBgColor, t),
-      greyColor: Color.lerp(greyColor, other.greyColor, t),
-      blueColor: Color.lerp(blueColor, other.blueColor, t),
-      langBtnBgColor: Color.lerp(langBtnBgColor, other.langBtnBgColor, t),
-      langBtnHighlightColor: Color.lerp(langBtnHighlightColor, other.langBtnHighlightColor, t),
-      authAppbarTextColor: Color.lerp(authAppbarTextColor, other.authAppbarTextColor, t),
-      photoIconBgColor: Color.lerp(photoIconBgColor, other.photoIconBgColor, t),
-      photoIconColor: Color.lerp(photoIconColor, other.photoIconColor, t),
       border_1: Color.lerp(border_1, other.border_1, t),
       border_2: Color.lerp(border_2, other.border_2, t),
       border_3: Color.lerp(border_3, other.border_3, t),

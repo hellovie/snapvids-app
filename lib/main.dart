@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/theme/dark_theme.dart';
 import 'package:snapvids_app/common/theme/light_theme.dart';
-import 'package:snapvids_app/feature/welcome/pages/welcome_page.dart';
+import 'package:snapvids_app/feature/home/pages/home_page.dart';
 
 void main() {
   runApp(
@@ -24,7 +24,7 @@ class SnapvidsApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const WelcomePage(),
+      home: const HomePage(),
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }

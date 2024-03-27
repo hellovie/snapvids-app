@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:snapvids_app/feature/auth/pages/login_page.dart';
-import 'package:snapvids_app/feature/auth/pages/user_info_page.dart';
-import 'package:snapvids_app/feature/auth/pages/verification_page.dart';
-import 'package:snapvids_app/feature/home/home_page.dart';
-import 'package:snapvids_app/feature/welcome/pages/welcome_page.dart';
+import 'package:snapvids_app/feature/activity/pages/activity_page.dart';
+import 'package:snapvids_app/feature/creation/pages/creation_page.dart';
+import 'package:snapvids_app/feature/discover/pages/discover_page.dart';
+import 'package:snapvids_app/feature/home/pages/home_page.dart';
+import 'package:snapvids_app/feature/login/pages/login_page.dart';
+import 'package:snapvids_app/feature/profile/pages/profile_page.dart';
 
 class Routes {
-  static const String welcome = 'welcome';
   static const String login = 'login';
-  static const String verification = 'verification';
-  static const String userInfo = 'user-info';
   static const String home = 'home';
+  static const String discover = 'discover';
+  static const String creation = 'creation';
+  static const String activity = 'activity';
+  static const String profile = 'profile';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case welcome:
-        return MaterialPageRoute(
-          builder: (context) => const WelcomePage(),
-        );
       case login:
         return MaterialPageRoute(
           builder: (context) => const LoginPage(),
         );
-      case verification:
-        final Map args = settings.arguments as Map;
-        return MaterialPageRoute(
-          builder: (context) => VerificationPage(
-            smsCodeId: args['smsCodeId'],
-            phoneNumber: args['phoneNumber'],
-          ),
-        );
-      case userInfo:
-        return MaterialPageRoute(
-          builder: (context) => const UserInfoPage(),
-        );
       case home:
         return MaterialPageRoute(
           builder: (context) => const HomePage(),
+        );
+      case discover:
+        return MaterialPageRoute(
+          builder: (context) => const DiscoverPage(),
+        );
+      case creation:
+        return MaterialPageRoute(
+          builder: (context) => const CreationPage(),
+        );
+      case activity:
+        return MaterialPageRoute(
+          builder: (context) => const ActivityPage(),
+        );
+      case profile:
+        return MaterialPageRoute(
+          builder: (context) => const ProfilePage(),
         );
       default:
         return MaterialPageRoute(
