@@ -36,4 +36,8 @@ class CommonColors {
   static const Color link_5 = Color(0xFF306FFF);
   static const Color link_6 = Color(0xFF3C7EFF);
   static const Color link_7 = Color(0xFF689FFF);
+
+  /// 消息提示小红点
+  static const Color messageTipCircle = Color(0xFFD32F2F);
+  static const Color onMessageTipCircle = Color(0xFFFFFFFF);
 }
