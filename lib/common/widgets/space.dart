@@ -31,11 +31,11 @@ class Space extends StatelessWidget {
   SizedBox _space() {
     if (direction == Axis.vertical) {
       return SizedBox(
-        height: size ?? DesignVariables.spaceDefault,
+        height: size ?? DesignVariables.spaceLarge,
       );
     } else {
       return SizedBox(
-        width: size ?? DesignVariables.spaceDefault,
+        width: size ?? DesignVariables.spaceLarge,
       );
     }
   }
