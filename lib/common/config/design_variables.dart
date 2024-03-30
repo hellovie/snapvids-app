@@ -29,4 +29,10 @@ class DesignVariables {
   static const double sizeLarge = 28;
   static const double sizeLarger = 32;
   static const double sizeExtraLarge = 36;
+
+  /// 输入框高度
+  static const double inputHeightMini = 32;
+  static const double inputHeightSmall = 40;
+  static const double inputHeightMedium = 48;
+  static const double inputHeightLarge = 56;
 }

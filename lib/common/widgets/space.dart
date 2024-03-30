@@ -47,10 +47,10 @@ class Space extends StatelessWidget {
 
     List<Widget> widgets = <Widget>[];
     for (int i = 0; i < children!.length; i++) {
-      if (i == children!.length) {
+      widgets.add(children![i]);
+      if (i == children!.length - 1) {
         break;
       }
-      widgets.add(children![i]);
       widgets.add(_space());
     }
 
