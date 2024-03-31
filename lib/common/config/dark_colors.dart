@@ -1,10 +1,6 @@
 import 'dart:ui';
 
 class DarkColors {
-  /// 主题色
-  static const Color primary = Color(0xFFFF375F);
-  static const Color secondary = Color(0xFF5077BD);
-
   /// 边框颜色
   static const Color border_1 = Color(0xFF2E2E30);
   static const Color border_2 = Color(0xFF484849);

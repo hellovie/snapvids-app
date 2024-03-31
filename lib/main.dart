@@ -5,6 +5,8 @@ import 'package:snapvids_app/common/theme/dark_theme.dart';
 import 'package:snapvids_app/common/theme/light_theme.dart';
 import 'package:snapvids_app/feature/login/pages/login_page.dart';
 
+import 'common/widgets/toast.dart';
+
 void main() {
   runApp(
     const ProviderScope(
@@ -26,6 +28,7 @@ class SnapvidsApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: const LoginPage(),
       onGenerateRoute: Routes.onGenerateRoute,
+      builder: Toast.init(),
     );
   }
 }

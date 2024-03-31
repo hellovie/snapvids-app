@@ -2,8 +2,8 @@
     <defs>
         <linearGradient id="paint0_linear_20_42" x1="0" y1="0" x2="47" y2="36"
                 gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF375F" />
-            <stop offset="1" stop-color="#6495ED" />
+            <stop stop-color="#F21458" />
+            <stop offset="1" stop-color="#37FFEC" />
         </linearGradient>
     </defs>
     <rect width="47" height="36" rx="15" fill="url(#paint0_linear_20_42)" />

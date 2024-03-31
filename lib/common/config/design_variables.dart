@@ -35,4 +35,7 @@ class DesignVariables {
   static const double inputHeightSmall = 40;
   static const double inputHeightMedium = 48;
   static const double inputHeightLarge = 56;
+
+  /// 加载动画尺寸
+  static const double loadingAnimationSize = 64;
 }

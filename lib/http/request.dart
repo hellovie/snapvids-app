@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:snapvids_app/common/widgets/toast.dart';
+import 'package:snapvids_app/http/result_response.dart';
 
 class Request {
   /// 请求根路径
@@ -20,30 +22,44 @@ class Request {
   static final Request _instance = Request._internal();
 
   Request._internal() {
-    _dio = Dio(BaseOptions(
-      baseUrl: _baseUrl,
-      connectTimeout: const Duration(milliseconds: _connectTimeout),
-      receiveTimeout: const Duration(
-        milliseconds: _receiveTimeout,
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: _baseUrl,
+        connectTimeout: const Duration(milliseconds: _connectTimeout),
+        receiveTimeout: const Duration(
+          milliseconds: _receiveTimeout,
+        ),
+        sendTimeout: const Duration(milliseconds: _sendTimeout),
       ),
-      sendTimeout: const Duration(milliseconds: _sendTimeout),
-    ));
+    );
 
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-        print("请求开始...");
-        // options.headers["Authorization"] = "Bearer $token";
-        handler.next(options);
-      },
-      onResponse: (Response response, ResponseInterceptorHandler handler) {
-        print("请求结束，状态码：${response.statusCode}");
-        print("请求结束，响应数据码：${response.data}");
-        handler.next(response);
-      },
-      onError: (DioException e, ErrorInterceptorHandler handler) {
-        print("请求错误：${e.message}");
-      },
-    ));
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+          Toast.showLoading();
+          // options.headers["Authorization"] = "Bearer $token";
+          handler.next(options);
+        },
+        onResponse: (Response response, ResponseInterceptorHandler handler) {
+          Toast.dismissLoading();
+          if (response.statusCode.toString().startsWith('2')) {
+            ResultResponse result = ResultResponse.fromJson(response.data);
+            if (!result.success) {
+              Toast.error(result.message);
+              return;
+            }
+
+            handler.next(response);
+            return;
+          }
+
+          _handleNonSuccessResponses(response, handler);
+        },
+        onError: (DioException e, ErrorInterceptorHandler handler) {
+          Toast.show('网络请求失败，请检查您的网络');
+        },
+      ),
+    );
   }
 
   /// Get 请求
@@ -152,5 +168,17 @@ class Request {
       }
       rethrow;
     }
+  }
+
+  void _handleNonSuccessResponses(Response response, ResponseInterceptorHandler handler) {
+    // Todo：需要对不同状态码进行分别处理
+    if (response.statusCode == 401) {}
+
+    if (response.statusCode == 403) {}
+
+    if (response.statusCode == 404) {}
+
+    ResultResponse result = ResultResponse.fromJson(response.data);
+    Toast.error(result.message);
   }
 }

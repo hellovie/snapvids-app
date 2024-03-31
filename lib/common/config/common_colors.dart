@@ -1,6 +1,10 @@
 import 'dart:ui';
 
 class CommonColors {
+  /// 主题色
+  static const Color primary = Color(0xFFF21458);
+  static const Color secondary = Color(0xFF37FFEC);
+
   /// 成功色
   static const Color success_1 = Color(0xFF004D1C);
   static const Color success_2 = Color(0xFF046625);

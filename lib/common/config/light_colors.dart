@@ -1,10 +1,6 @@
 import 'dart:ui';
 
 class LightColors {
-  /// 主题色
-  static const Color primary = Color(0xFFFF4272);
-  static const Color secondary = Color(0xFF6495ED);
-
   /// 边框颜色
   static const Color border_1 = Color(0xFFF2F3F5);
   static const Color border_2 = Color(0xFFE5E6EB);
