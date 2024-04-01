@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snapvids_app/common/config/icon_assets.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
+import 'package:snapvids_app/feature/Index/widgets/bottom_navigation.dart';
 import 'package:snapvids_app/feature/activity/pages/activity_page.dart';
 import 'package:snapvids_app/feature/creation/pages/creation_page.dart';
 import 'package:snapvids_app/feature/discover/pages/discover_page.dart';
 import 'package:snapvids_app/feature/home/pages/home_page.dart';
-import 'package:snapvids_app/feature/layout/widgets/bottom_navigation.dart';
 import 'package:snapvids_app/feature/profile/pages/profile_page.dart';
 
-class LayoutPage extends StatefulWidget {
-  const LayoutPage({
+const Map<int, String> _routeTable = {
+  -1: Routes.creation,
+  0: Routes.home,
+  1: Routes.discover,
+  2: Routes.activity,
+  3: Routes.profile,
+};
+
+class IndexPage extends StatefulWidget {
+  const IndexPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<LayoutPage> createState() => _LayoutPageState();
+  State<IndexPage> createState() => _IndexPageState();
 }
 
-class _LayoutPageState extends State<LayoutPage> {
+class _IndexPageState extends State<IndexPage> {
   late PageController pageController;
   int currentIndex = 0;
 
@@ -45,10 +54,10 @@ class _LayoutPageState extends State<LayoutPage> {
         controller: pageController,
         onPageChanged: _onChangedIndex,
         children: const [
-          HomePage(),
-          DiscoverPage(),
-          ActivityPage(),
-          ProfilePage(),
+          HomePage(index: 0),
+          DiscoverPage(index: 1),
+          ActivityPage(index: 2),
+          ProfilePage(index: 3),
         ],
       ),
       bottomNavigationBar: BottomNavigation(
@@ -100,6 +109,12 @@ class _LayoutPageState extends State<LayoutPage> {
   }
 
   Future _showCreationPage(context) {
+    String routeName = Routes.routeBeforeHook(_routeTable[-1]);
+    if (routeName != _routeTable[-1]) {
+      Navigator.pushNamed(context, Routes.login);
+      return Future(() => null);
+    }
+    
     final statusBarHeight = MediaQuery.of(context).padding.top;
 
     return showModalBottomSheet(
@@ -112,13 +127,19 @@ class _LayoutPageState extends State<LayoutPage> {
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height - statusBarHeight,
           ),
-          child: const CreationPage(),
+          child: const CreationPage(index: -1),
         );
       },
     );
   }
 
   void _onChangedIndex(int index) {
+    String routeName = Routes.routeBeforeHook(_routeTable[index]);
+    if (routeName != _routeTable[index]) {
+      Navigator.pushNamed(context, Routes.login);
+      return;
+    }
+
     setState(() {
       currentIndex = index;
     });

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
+  final int index;
+
   const ProfilePage({
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override

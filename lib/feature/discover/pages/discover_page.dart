@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DiscoverPage extends StatefulWidget {
+  final int index;
+
   const DiscoverPage({
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override

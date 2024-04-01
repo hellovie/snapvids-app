@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  final int index;
+
   const HomePage({
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override

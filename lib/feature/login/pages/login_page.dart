@@ -4,6 +4,7 @@ import 'package:snapvids_app/common/config/common_colors.dart';
 import 'package:snapvids_app/common/config/design_variables.dart';
 import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
 import 'package:snapvids_app/common/widgets/space.dart';
+import 'package:snapvids_app/common/widgets/toast.dart';
 import 'package:snapvids_app/feature/login/widgets/username_login_form.dart';
 
 class LoginPage extends StatefulWidget {
@@ -213,7 +214,13 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: isAgree ? () => usernameLoginController.submit() : null,
+                            onPressed: isAgree ? () async {
+                              bool isLoginSuccess = await usernameLoginController.submit();
+                              if (isLoginSuccess) {
+                                Toast.show('登录成功');
+                                Navigator.of(context).pop();
+                              }
+                            } : null,
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
                               maximumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),

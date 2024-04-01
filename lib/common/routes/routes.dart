@@ -1,45 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:snapvids_app/feature/activity/pages/activity_page.dart';
-import 'package:snapvids_app/feature/creation/pages/creation_page.dart';
-import 'package:snapvids_app/feature/discover/pages/discover_page.dart';
-import 'package:snapvids_app/feature/home/pages/home_page.dart';
+import 'package:snapvids_app/common/store/login_store.dart';
+import 'package:snapvids_app/feature/index/pages/index_page.dart';
 import 'package:snapvids_app/feature/login/pages/login_page.dart';
-import 'package:snapvids_app/feature/profile/pages/profile_page.dart';
 
 class Routes {
+  static const String index = 'index';
   static const String login = 'login';
   static const String home = 'home';
   static const String discover = 'discover';
   static const String creation = 'creation';
   static const String activity = 'activity';
   static const String profile = 'profile';
+  static const String notFound = 'notFound';
+  static const List<String> _whiteList = [index, login, home, notFound];
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
+    String jumpRouteName = routeBeforeHook(settings.name);
+
+    switch (jumpRouteName) {
+      case index:
+        return MaterialPageRoute(
+          builder: (context) => const IndexPage(),
+        );
       case login:
         return MaterialPageRoute(
           builder: (context) => const LoginPage(),
         );
-      case home:
-        return MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        );
-      case discover:
-        return MaterialPageRoute(
-          builder: (context) => const DiscoverPage(),
-        );
-      case creation:
-        return MaterialPageRoute(
-          builder: (context) => const CreationPage(),
-        );
-      case activity:
-        return MaterialPageRoute(
-          builder: (context) => const ActivityPage(),
-        );
-      case profile:
-        return MaterialPageRoute(
-          builder: (context) => const ProfilePage(),
-        );
+      case notFound:
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
@@ -49,5 +36,14 @@ class Routes {
           ),
         );
     }
+  }
+
+  static String routeBeforeHook(String? routeName) {
+    final bool isLogin = LoginStore.isLogin();
+    if (isLogin || _whiteList.contains(routeName)) {
+      return routeName ?? notFound;
+    }
+
+    return login;
   }
 }

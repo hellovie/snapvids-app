@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:snapvids_app/common/config/design_variables.dart';
-import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
 
 class CreationPage extends StatefulWidget {
+  final int index;
+
   const CreationPage({
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override
