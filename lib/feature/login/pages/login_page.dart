@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snapvids_app/common/config/common_colors.dart';
 import 'package:snapvids_app/common/config/design_variables.dart';
 import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/widgets/space.dart';
 import 'package:snapvids_app/common/widgets/toast.dart';
 import 'package:snapvids_app/feature/login/widgets/username_login_form.dart';
@@ -94,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: InkWell(
-          onTap: () => Navigator.of(context).pop(),
+          onTap: () =>
+              Navigator.of(context).pushNamedAndRemoveUntil(Routes.index, (route) => false),
           child: Container(
             margin: const EdgeInsets.all(DesignVariables.spaceMedium),
             child: const Icon(
@@ -214,13 +216,16 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: isAgree ? () async {
-                              bool isLoginSuccess = await usernameLoginController.submit();
-                              if (isLoginSuccess) {
-                                Toast.show('登录成功');
-                                Navigator.of(context).pop();
-                              }
-                            } : null,
+                            onPressed: isAgree
+                                ? () async {
+                                    bool isLoginSuccess = await usernameLoginController.submit();
+                                    if (isLoginSuccess) {
+                                      Toast.show('登录成功');
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil(Routes.index, (route) => false);
+                                    }
+                                  }
+                                : null,
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
                               maximumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),

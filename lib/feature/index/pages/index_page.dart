@@ -111,10 +111,10 @@ class _IndexPageState extends State<IndexPage> {
   Future _showCreationPage(context) {
     String routeName = Routes.routeBeforeHook(_routeTable[-1]);
     if (routeName != _routeTable[-1]) {
-      Navigator.pushNamed(context, Routes.login);
+      Navigator.of(context).pushNamedAndRemoveUntil(Routes.login, (route) => false);
       return Future(() => null);
     }
-    
+
     final statusBarHeight = MediaQuery.of(context).padding.top;
 
     return showModalBottomSheet(
@@ -136,7 +136,7 @@ class _IndexPageState extends State<IndexPage> {
   void _onChangedIndex(int index) {
     String routeName = Routes.routeBeforeHook(_routeTable[index]);
     if (routeName != _routeTable[index]) {
-      Navigator.pushNamed(context, Routes.login);
+      Navigator.of(context).pushNamedAndRemoveUntil(Routes.login, (route) => false);
       return;
     }
 

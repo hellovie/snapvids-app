@@ -9,6 +9,7 @@ import 'package:snapvids_app/common/store/login_store.dart';
 import 'package:snapvids_app/common/widgets/input_form_field.dart';
 import 'package:snapvids_app/common/widgets/space.dart';
 import 'package:snapvids_app/http/apis/login_api.dart';
+import 'package:snapvids_app/http/result_response.dart';
 
 class UsernameLoginController {
   late Future<bool> Function() submit;
@@ -41,11 +42,14 @@ class _UsernameLoginFormState extends State<UsernameLoginForm> {
   void _getGraphicalCaptchaData() async {
     isLoadingCaptcha = true;
     try {
-      GraphicalCaptchaModel result = await LoginApi.getGraphicalCaptcha();
-      setState(() {
-        _captchaId = result.captchaId;
-        _base64Captcha = base64Decode(result.base64Captcha);
-      });
+      ResultResponse<GraphicalCaptchaModel> res = await LoginApi.getGraphicalCaptcha();
+      GraphicalCaptchaModel? result = res.data;
+      if (result != null) {
+        setState(() {
+          _captchaId = result.captchaId;
+          _base64Captcha = base64Decode(result.base64Captcha);
+        });
+      }
     } on Exception catch (ex) {
       _captchaId = ex.toString();
       _base64Captcha = base64Decode(captchaFetchFailPlaceHolder);
@@ -60,8 +64,9 @@ class _UsernameLoginFormState extends State<UsernameLoginForm> {
       String password = passwordController.text;
       String captchaId = _captchaId;
       String captcha = captchaController.text;
-      LoginModel result = await LoginApi.loginByUsername(username, password, captchaId, captcha);
-      LoginStore.saveLoginInfo(result.accessToken, result.refreshToken, result.expiresInSeconds);
+      ResultResponse<LoginModel> res =
+          await LoginApi.loginByUsername(username, password, captchaId, captcha);
+      LoginStore.saveToken(res.data?.tokenModel);
       return true;
     } on Exception catch (_) {
       return false;

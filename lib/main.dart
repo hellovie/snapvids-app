@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snapvids_app/common/routes/routes.dart';
-import 'package:snapvids_app/common/store/login_store.dart';
+import 'package:snapvids_app/common/store/shared_preferences_store.dart';
 import 'package:snapvids_app/common/theme/dark_theme.dart';
 import 'package:snapvids_app/common/theme/light_theme.dart';
 
+import 'common/keys/global.dart';
 import 'common/widgets/toast.dart';
 
 void main() async {
-  bool isInitCompleted = await LoginStore.init();
+  bool isInitCompleted = await SharedPreferencesStore.init();
   if (isInitCompleted) {
     runApp(
       const ProviderScope(
@@ -29,8 +30,9 @@ class SnapvidsApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      initialRoute: "index",
+      initialRoute: 'index',
       onGenerateRoute: Routes.onGenerateRoute,
+      navigatorKey: Global.navigatorKey,
       builder: Toast.init(),
     );
   }

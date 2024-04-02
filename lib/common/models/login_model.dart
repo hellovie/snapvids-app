@@ -1,3 +1,5 @@
+import 'package:snapvids_app/common/models/token_model.dart';
+
 class LoginModel {
   final int id;
   final String username;
@@ -5,9 +7,7 @@ class LoginModel {
   final String lastLoginTime;
   final String registerIp;
   final String registerTime;
-  final String accessToken;
-  final String refreshToken;
-  final int expiresInSeconds;
+  final TokenModel tokenModel;
 
   LoginModel({
     required this.id,
@@ -16,9 +16,7 @@ class LoginModel {
     required this.lastLoginTime,
     required this.registerIp,
     required this.registerTime,
-    required this.accessToken,
-    required this.refreshToken,
-    required this.expiresInSeconds,
+    required this.tokenModel,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,13 +27,16 @@ class LoginModel {
       'lastLoginTime': lastLoginTime,
       'registerIp': registerIp,
       'registerTime': registerTime,
-      'accessToken': accessToken,
-      'refreshToken': refreshToken,
-      'expiresInSeconds': expiresInSeconds,
+      'tokenModel': tokenModel,
     };
   }
 
   factory LoginModel.fromMap(Map<String, dynamic> map) {
+    final tokenMap = {
+      'accessToken': map['accessToken'] ?? '',
+      'refreshToken': map['refreshToken'] ?? '',
+      'expiresInSeconds': map['expiresInSeconds'] ?? 0,
+    };
     return LoginModel(
       id: map['id'] ?? 0,
       username: map['username'] ?? '',
@@ -43,9 +44,7 @@ class LoginModel {
       lastLoginTime: map['lastLoginTime'],
       registerIp: map['registerIp'] ?? '',
       registerTime: map['registerTime'],
-      accessToken: map['accessToken'] ?? '',
-      refreshToken: map['refreshToken'] ?? '',
-      expiresInSeconds: map['expiresInSeconds'] ?? 0,
+      tokenModel: TokenModel.fromMap(tokenMap),
     );
   }
 }

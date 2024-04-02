@@ -38,7 +38,7 @@ class ResultResponse<T> {
       success: json['success'] ?? false,
       code: json['code'] ?? '',
       message: json['message'] ?? '服务器繁忙，请稍后再试',
-      data: dataFromJson != null ? dataFromJson(json['data']) : null,
+      data: dataFromJson != null ? dataFromJson(json['data']) : json['data'],
       timestamp: json['timestamp'] ?? '',
       canRetry: json['canRetry'] ?? false,
       traceId: json['traceId'] ?? '',

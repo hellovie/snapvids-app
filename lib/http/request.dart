@@ -1,6 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:snapvids_app/common/keys/global.dart';
+import 'package:snapvids_app/common/models/token_model.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
+import 'package:snapvids_app/common/store/login_store.dart';
+import 'package:snapvids_app/common/store/shared_preferences_store.dart';
 import 'package:snapvids_app/common/widgets/toast.dart';
+import 'package:snapvids_app/http/apis/login_api.dart';
+import 'package:snapvids_app/http/error_code.dart';
 import 'package:snapvids_app/http/result_response.dart';
 
 class Request {
@@ -37,26 +44,40 @@ class Request {
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
           Toast.showLoading();
-          // options.headers["Authorization"] = "Bearer $token";
+          _addAuthorizationHeader(options, SharedPreferencesStore.getAccessToken());
           handler.next(options);
         },
-        onResponse: (Response response, ResponseInterceptorHandler handler) {
+        onResponse: (Response response, ResponseInterceptorHandler handler) async {
           Toast.dismissLoading();
           if (response.statusCode.toString().startsWith('2')) {
             ResultResponse result = ResultResponse.fromJson(response.data);
-            if (!result.success) {
-              Toast.error(result.message);
+            if (result.success) {
+              handler.next(response);
               return;
             }
 
-            handler.next(response);
+            // 访问令牌过期，可以刷新令牌后再请求
+            if (result.code == ErrorCode.accessTokenHasExpired) {
+              String newAccessToken = await _refreshToken();
+              _addAuthorizationHeader(response.requestOptions, newAccessToken);
+              return handler.resolve(await _instance._dio.fetch(response.requestOptions));
+            }
+
+            // 刷新令牌过期，重新登录
+            if (result.code == ErrorCode.refreshTokenHasExpired) {
+              Global.navigatorKey.currentState
+                  ?.pushNamedAndRemoveUntil(Routes.login, (route) => false);
+              Toast.show('用户未登录');
+              return;
+            }
+
+            Toast.show(result.message);
             return;
           }
-
-          _handleNonSuccessResponses(response, handler);
         },
-        onError: (DioException e, ErrorInterceptorHandler handler) {
-          Toast.show('网络请求失败，请检查您的网络');
+        onError: (DioException ex, ErrorInterceptorHandler handler) {
+          Toast.dismissLoading();
+          _handleNonSuccessResponses(ex, handler);
         },
       ),
     );
@@ -170,15 +191,43 @@ class Request {
     }
   }
 
-  void _handleNonSuccessResponses(Response response, ResponseInterceptorHandler handler) {
-    // Todo：需要对不同状态码进行分别处理
-    if (response.statusCode == 401) {}
+  void _handleNonSuccessResponses(DioException ex, ErrorInterceptorHandler handler) {
+    if (ex.response?.statusCode == 401) {
+      Global.navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.login, (route) => false);
+      Toast.show('用户未登录');
+      return;
+    }
 
-    if (response.statusCode == 403) {}
+    if (ex.response?.statusCode == 403) {
+      Global.navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.index, (route) => false);
+      Toast.show('无权限访问');
+      return;
+    }
 
-    if (response.statusCode == 404) {}
+    if (ex.response?.statusCode == 404) {
+      Global.navigatorKey.currentState?.pushNamedAndRemoveUntil(Routes.index, (route) => false);
+      Toast.show('资源不存在');
+      return;
+    }
 
-    ResultResponse result = ResultResponse.fromJson(response.data);
-    Toast.error(result.message);
+    Toast.show('网络请求失败，请检查您的网络');
+  }
+
+  void _addAuthorizationHeader(RequestOptions options, String token) {
+    if (LoginStore.isLogin()) {
+      options.headers["Authorization"] = "Bearer $token";
+    }
+  }
+
+  Future<String> _refreshToken() async {
+    // Todo：仅保留一个刷新令牌请求即可
+    LoginStore.renewAccessTokenWithRefreshToken();
+    ResultResponse<TokenModel> res = await LoginApi.refreshToken();
+    TokenModel? data = res.data;
+    if (data != null) {
+      LoginStore.saveToken(res.data);
+      return data.accessToken;
+    }
+    return '';
   }
 }
