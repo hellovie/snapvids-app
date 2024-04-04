@@ -6,6 +6,7 @@ import 'package:snapvids_app/common/extension/custom_theme_extension.dart';
 import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/widgets/space.dart';
 import 'package:snapvids_app/common/widgets/toast.dart';
+import 'package:snapvids_app/feature/login/widgets/phone_number_login_form.dart';
 import 'package:snapvids_app/feature/login/widgets/username_login_form.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,7 +21,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool isAgree = false;
   bool isPhoneNumberLogin = false;
-  final UsernameLoginController usernameLoginController = UsernameLoginController();
 
   void _showOtherLoginPicker(BuildContext context) {
     showModalBottomSheet(
@@ -58,19 +58,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               child: const Text('QQ 登录'),
-              onPressed: () {},
+              onPressed: () {
+                Toast.show('敬请期待');
+              },
             ),
             const Divider(height: buttonBorder),
             ElevatedButton(
               style: buttonStyle,
               child: const Text('微信登录'),
-              onPressed: () {},
+              onPressed: () {
+                Toast.show('敬请期待');
+              },
             ),
             const Divider(height: buttonBorder),
             ElevatedButton(
               style: buttonStyle,
               child: const Text('Google 登录'),
-              onPressed: () {},
+              onPressed: () {
+                Toast.show('敬请期待');
+              },
             ),
             const Space(direction: Axis.vertical, size: DesignVariables.spaceMedium),
             ElevatedButton(
@@ -174,7 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                               style: const TextStyle(
                                 color: CommonColors.link_4,
                               ),
-                              recognizer: TapGestureRecognizer()..onTap = () {},
+                              recognizer: TapGestureRecognizer()..onTap = () {
+                                Toast.show('敬请期待');
+                              },
                             ),
                             const WidgetSpan(child: Space(size: DesignVariables.spaceSmall)),
                             TextSpan(
@@ -189,7 +197,9 @@ class _LoginPageState extends State<LoginPage> {
                               style: const TextStyle(
                                 color: CommonColors.link_4,
                               ),
-                              recognizer: TapGestureRecognizer()..onTap = () {},
+                              recognizer: TapGestureRecognizer()..onTap = () {
+                                Toast.show('敬请期待');
+                              },
                             ),
                           ],
                         ),
@@ -202,42 +212,12 @@ class _LoginPageState extends State<LoginPage> {
                       right: horizontalPadding,
                     ),
                     child: isPhoneNumberLogin
-                        ? Container()
-                        : UsernameLoginForm(controller: usernameLoginController),
+                        ? PhoneNumberLoginForm(isAgree: isAgree)
+                        : UsernameLoginForm(isAgree: isAgree),
                   ),
                   Container(
                     margin: const EdgeInsets.only(
-                      left: horizontalPadding,
-                      right: horizontalPadding,
                       top: DesignVariables.spaceLarger,
-                      bottom: DesignVariables.spaceLarger,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: isAgree
-                                ? () async {
-                                    bool isLoginSuccess = await usernameLoginController.submit();
-                                    if (isLoginSuccess) {
-                                      Toast.show('登录成功');
-                                      Navigator.of(context)
-                                          .pushNamedAndRemoveUntil(Routes.index, (route) => false);
-                                    }
-                                  }
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
-                              maximumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
-                            ),
-                            child: const Text('验证并登录'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
                       left: horizontalPadding,
                       right: horizontalPadding,
                     ),
@@ -276,10 +256,13 @@ class _LoginPageState extends State<LoginPage> {
                       text: TextSpan(
                         text: "手机号不用了？ ",
                         style: TextStyle(color: context.theme.text_3),
-                        children: const [
+                        children: [
                           TextSpan(
                             text: '找回账号',
-                            style: TextStyle(color: CommonColors.link_4),
+                            style: const TextStyle(color: CommonColors.link_4),
+                            recognizer: TapGestureRecognizer()..onTap = () {
+                              Toast.show('敬请期待');
+                            },
                           ),
                         ],
                       ),

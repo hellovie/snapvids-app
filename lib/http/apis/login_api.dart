@@ -22,20 +22,22 @@ class LoginApi {
   }
 
   static Future<ResultResponse<GraphicalCaptchaModel>> getGraphicalCaptcha() async {
-    final res = await Request.get(
-      '/login/username/captcha',
-    );
+    final res = await Request.get('/login/username/captcha');
     final ResultResponse<GraphicalCaptchaModel> result =
         ResultResponse.fromJson(res, dataFromJson: GraphicalCaptchaModel.fromMap);
     return result;
   }
 
   static Future<ResultResponse<TokenModel>> refreshToken() async {
-    final res = await Request.get(
-      '/tokens/refresh',
-    );
+    final res = await Request.get('/tokens/refresh');
     final ResultResponse<TokenModel> result =
         ResultResponse.fromJson(res, dataFromJson: TokenModel.fromMap);
+    return result;
+  }
+
+  static Future<ResultResponse<void>> logout() async {
+    final res = await Request.get('/logout');
+    final ResultResponse<TokenModel> result = ResultResponse.fromJson(res);
     return result;
   }
 }

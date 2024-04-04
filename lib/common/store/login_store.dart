@@ -27,4 +27,10 @@ class LoginStore {
   static void renewAccessTokenWithRefreshToken() {
     SharedPreferencesStore.setAccessToken(SharedPreferencesStore.getRefreshToken());
   }
+
+  static void removeToken() {
+    SharedPreferencesStore.setAccessToken('');
+    SharedPreferencesStore.setRefreshToken('');
+    SharedPreferencesStore.setExpiresInSeconds(0);
+  }
 }

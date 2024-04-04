@@ -5,33 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:snapvids_app/common/config/design_variables.dart';
 import 'package:snapvids_app/common/models/graphical_captcha_model.dart';
 import 'package:snapvids_app/common/models/login_model.dart';
+import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/store/login_store.dart';
 import 'package:snapvids_app/common/widgets/input_form_field.dart';
 import 'package:snapvids_app/common/widgets/space.dart';
+import 'package:snapvids_app/common/widgets/toast.dart';
 import 'package:snapvids_app/http/apis/login_api.dart';
 import 'package:snapvids_app/http/result_response.dart';
 
-class UsernameLoginController {
-  late Future<bool> Function() submit;
-}
-
 class UsernameLoginForm extends StatefulWidget {
-  final UsernameLoginController controller;
+  final bool isAgree;
 
   const UsernameLoginForm({
     Key? key,
-    required this.controller,
+    required this.isAgree,
   }) : super(key: key);
 
   @override
-  State<UsernameLoginForm> createState() => _UsernameLoginFormState(controller);
+  State<UsernameLoginForm> createState() => _UsernameLoginFormState();
 }
 
 class _UsernameLoginFormState extends State<UsernameLoginForm> {
-  _UsernameLoginFormState(UsernameLoginController controller) {
-    controller.submit = _login;
-  }
-
   late TextEditingController usernameController;
   late TextEditingController passwordController;
   late TextEditingController captchaController;
@@ -119,6 +113,30 @@ class _UsernameLoginFormState extends State<UsernameLoginForm> {
               child: SizedBox(
                 height: DesignVariables.inputHeightMedium,
                 child: Image.memory(_base64Captcha),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: widget.isAgree
+                    ? () async {
+                        _login().then((isLoginSuccess) {
+                          if (isLoginSuccess) {
+                            Toast.show('登录成功');
+                            Navigator.of(context)
+                                .pushNamedAndRemoveUntil(Routes.index, (route) => false);
+                          }
+                        });
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
+                  maximumSize: const Size.fromHeight(DesignVariables.inputHeightMedium),
+                ),
+                child: const Text('验证并登录'),
               ),
             ),
           ],
