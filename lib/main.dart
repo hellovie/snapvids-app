@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:snapvids_app/common/routes/routes.dart';
 import 'package:snapvids_app/common/store/shared_preferences_store.dart';
@@ -9,6 +10,11 @@ import 'common/keys/global.dart';
 import 'common/widgets/toast.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
   bool isInitCompleted = await SharedPreferencesStore.init();
   if (isInitCompleted) {
     runApp(

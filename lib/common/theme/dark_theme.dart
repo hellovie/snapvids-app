@@ -47,5 +47,12 @@ ThemeData darkTheme() {
       endIndent: 0,
       indent: 0,
     ),
+    tabBarTheme: const TabBarTheme(
+      dividerColor: Colors.transparent,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide.none,
+        insets: EdgeInsets.zero,
+      ),
+    ),
   );
 }
