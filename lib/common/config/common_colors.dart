@@ -44,4 +44,7 @@ class CommonColors {
   /// 消息提示小红点
   static const Color messageTipCircle = Color(0xFFD32F2F);
   static const Color onMessageTipCircle = Color(0xFFFFFFFF);
+
+  /// 图标填充颜色
+  static const Color iconFill = Color(0xEEFFFFFF);
 }
