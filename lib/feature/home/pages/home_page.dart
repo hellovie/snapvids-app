@@ -34,6 +34,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         caption: 'Snapvids, a short video mobile APP based on Spring Boot and Flutter.',
         authorNickname: 'Hellovie',
         authorAvatarUrl: 'https://avatars.githubusercontent.com/u/98229169?s=400&u=a710b279be750828e824b28d8a66c55a5b10a58a&v=4',
+        coverUrl: 'https://avatars.githubusercontent.com/u/98229169?s=400&u=a710b279be750828e824b28d8a66c55a5b10a58a&v=4',
+        creationUrl: 'http://172.30.16.1:8081/api/resources/default/20240406/2eifgPvgOs9A14kv6RLEgd09HiT?id=11&type=VIDEO',
         isLiked: true,
         likeCount: 99999,
         isCollectd: true,
@@ -43,13 +45,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         bgmName: "Nothing's Gonna Change My Love For You",
         bgmCoverUrl: '',
         isFollowed: true,
-        isPlay: false,
       ),
       CreationModel(
         id: 2,
-        caption: 'Snapvids，一款基于 Spring Boot 和 Flutter 的短视频移动 APP。',
+        caption: 'KMP算法实现详解。文章地址：https://blog.csdn.net/thehellovie/article/details/130041546',
         authorNickname: '再睡5分钟吧',
         authorAvatarUrl: 'https://hellovie.github.io/img/avatar.jpg',
+        coverUrl: 'https://hellovie.github.io/img/avatar.jpg',
+        creationUrl: 'https://video-live.csdnimg.cn/102cbb90d69d71edb8c36632b68f0102/d22060407e9b45d5b9cfaf8fe9cf6081.m3u8',
         isLiked: false,
         likeCount: 88,
         isCollectd: false,
@@ -59,7 +62,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         bgmName: 'Love Song',
         bgmCoverUrl: 'https://ww4.sinaimg.cn/mw690/65c91eddjw1e826ijlx7rj20hs0hsdh0.jpg',
         isFollowed: false,
-        isPlay: true,
       ),
     ];
     followingCreations = [];

@@ -1,3 +1,5 @@
+import 'package:snapvids_app/common/enums/ui_enums.dart';
+
 class CreationModel {
   final int id;
   final String caption;
@@ -12,7 +14,9 @@ class CreationModel {
   final String bgmName;
   final String bgmCoverUrl;
   final bool isFollowed;
-  final bool isPlay;
+  final PlayState playState;
+  final String creationUrl;
+  final String coverUrl;
 
   CreationModel({
     required this.id,
@@ -28,7 +32,9 @@ class CreationModel {
     required this.bgmName,
     required this.bgmCoverUrl,
     required this.isFollowed,
-    required this.isPlay,
+    this.playState = PlayState.init,
+    required this.creationUrl,
+    required this.coverUrl,
   });
 
   Map<String, dynamic> toMap() {
@@ -46,7 +52,9 @@ class CreationModel {
       'bgmName': bgmName,
       'bgmCoverUrl': bgmCoverUrl,
       'isFollowed': isFollowed,
-      'isPlay': isPlay,
+      'playState': playState,
+      'creationUrl': creationUrl,
+      'creationUrl': coverUrl,
     };
   }
 
@@ -65,7 +73,8 @@ class CreationModel {
       bgmName: map['bgmName'] ?? '',
       bgmCoverUrl: map['bgmCoverUrl'] ?? '',
       isFollowed: map['isFollowed'] ?? false,
-      isPlay: false,
+      creationUrl: map['creationUrl'] ?? '',
+      coverUrl: map['coverUrl'] ?? '',
     );
   }
 
@@ -82,8 +91,10 @@ class CreationModel {
     int? shareCount,
     String? bgmName,
     String? bgmCoverUrl,
+    String? creationUrl,
+    String? coverUrl,
     bool? isFollowed,
-    bool? isPlay,
+    PlayState? playState,
   }) {
     return CreationModel(
       id: id ?? this.id,
@@ -98,8 +109,10 @@ class CreationModel {
       shareCount: shareCount ?? this.shareCount,
       bgmName: bgmName ?? this.bgmName,
       bgmCoverUrl: bgmCoverUrl ?? this.bgmCoverUrl,
+      creationUrl: creationUrl ?? this.creationUrl,
+      coverUrl: coverUrl ?? this.coverUrl,
       isFollowed: isFollowed ?? this.isFollowed,
-      isPlay: isPlay ?? this.isPlay,
+      playState: playState ?? this.playState,
     );
   }
 }
