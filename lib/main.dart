@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:snapvids_app/common/routes/routes.dart';
-import 'package:snapvids_app/common/store/shared_preferences_store.dart';
-import 'package:snapvids_app/common/theme/dark_theme.dart';
-import 'package:snapvids_app/common/theme/light_theme.dart';
-
-import 'common/keys/global.dart';
-import 'common/widgets/toast.dart';
+import 'package:get/get.dart';
+import 'package:snapvids_app/entry_point.dart';
+import 'package:snapvids_app/utils/helpers/toast_helper.dart';
+import 'package:snapvids_app/utils/storages/shared_preferences_utils.dart';
+import 'package:snapvids_app/utils/themes/app_theme.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -15,7 +13,7 @@ void main() async {
       statusBarColor: Colors.transparent,
     ),
   );
-  bool isInitCompleted = await SharedPreferencesStore.init();
+  bool isInitCompleted = await SharedPreferencesUtils.init();
   if (isInitCompleted) {
     runApp(
       const ProviderScope(
@@ -30,16 +28,14 @@ class SnapvidsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Snapvids',
-      theme: lightTheme(),
-      darkTheme: darkTheme(),
+      theme: SnapvidsAppTheme.lightTheme,
+      darkTheme: SnapvidsAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: 'index',
-      onGenerateRoute: Routes.onGenerateRoute,
-      navigatorKey: Global.navigatorKey,
-      builder: Toast.init(),
+      home: const NavigationMenu(),
+      builder: ToastHelper.init(),
     );
   }
 }
