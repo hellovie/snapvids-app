@@ -22,8 +22,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
     background: UiColors.backgroundLight,
     messagePromptCircle: UiColors.messagePromptCircleLight,
     onMessagePromptCircle: UiColors.onMessagePromptCircleLight,
-    bottomAppBarSelectedColor: UiColors.bottomAppBarSelectedColorLight,
-    bottomAppBarUnselectedColor: UiColors.bottomAppBarUnselectedColorLight,
+    bottomAppBarSelected: UiColors.bottomAppBarSelectedLight,
+    bottomAppBarUnselected: UiColors.bottomAppBarUnselectedLight,
   );
 
   static final darkMode = ColorExtension(
@@ -40,8 +40,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
     background: UiColors.backgroundDark,
     messagePromptCircle: UiColors.messagePromptCircleDark,
     onMessagePromptCircle: UiColors.onMessagePromptCircleDark,
-    bottomAppBarSelectedColor: UiColors.bottomAppBarSelectedColorDark,
-    bottomAppBarUnselectedColor: UiColors.bottomAppBarUnselectedColorDark,
+    bottomAppBarSelected: UiColors.bottomAppBarSelectedDark,
+    bottomAppBarUnselected: UiColors.bottomAppBarUnselectedDark,
   );
 
   final Color? link;
@@ -57,8 +57,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
   final Color? background;
   final Color? messagePromptCircle;
   final Color? onMessagePromptCircle;
-  final Color? bottomAppBarSelectedColor;
-  final Color? bottomAppBarUnselectedColor;
+  final Color? bottomAppBarSelected;
+  final Color? bottomAppBarUnselected;
 
   const ColorExtension({
     this.link,
@@ -74,8 +74,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
     this.background,
     this.messagePromptCircle,
     this.onMessagePromptCircle,
-    this.bottomAppBarSelectedColor,
-    this.bottomAppBarUnselectedColor,
+    this.bottomAppBarSelected,
+    this.bottomAppBarUnselected,
   });
 
   @override
@@ -93,8 +93,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
     Color? background,
     Color? messagePromptCircle,
     Color? onMessagePromptCircle,
-    Color? bottomAppBarSelectedColor,
-    Color? bottomAppBarUnselectedColor,
+    Color? bottomAppBarSelected,
+    Color? bottomAppBarUnselected,
   }) {
     return ColorExtension(
       link: link ?? this.link,
@@ -110,8 +110,8 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       background: background ?? this.background,
       messagePromptCircle: messagePromptCircle ?? this.messagePromptCircle,
       onMessagePromptCircle: onMessagePromptCircle ?? this.onMessagePromptCircle,
-      bottomAppBarSelectedColor: bottomAppBarSelectedColor ?? this.bottomAppBarSelectedColor,
-      bottomAppBarUnselectedColor: bottomAppBarUnselectedColor ?? this.bottomAppBarUnselectedColor,
+      bottomAppBarSelected: bottomAppBarSelected ?? this.bottomAppBarSelected,
+      bottomAppBarUnselected: bottomAppBarUnselected ?? this.bottomAppBarUnselected,
     );
   }
 
@@ -132,10 +132,10 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       background: Color.lerp(background, other.background, t),
       messagePromptCircle: Color.lerp(messagePromptCircle, other.messagePromptCircle, t),
       onMessagePromptCircle: Color.lerp(onMessagePromptCircle, other.onMessagePromptCircle, t),
-      bottomAppBarSelectedColor:
-          Color.lerp(bottomAppBarSelectedColor, other.bottomAppBarSelectedColor, t),
-      bottomAppBarUnselectedColor:
-          Color.lerp(bottomAppBarUnselectedColor, other.bottomAppBarUnselectedColor, t),
+      bottomAppBarSelected:
+          Color.lerp(bottomAppBarSelected, other.bottomAppBarSelected, t),
+      bottomAppBarUnselected:
+          Color.lerp(bottomAppBarUnselected, other.bottomAppBarUnselected, t),
     );
   }
 }

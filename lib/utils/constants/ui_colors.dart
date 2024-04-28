@@ -47,10 +47,10 @@ class UiColors {
   // BottomAppBar Colors
   static const Color bottomAppBarBackgroundLight = Color(0xFFFFFFFF);
   static const Color bottomAppBarBackgroundDark = Color(0xFF000000);
-  static const Color bottomAppBarSelectedColorLight = backgroundDark;
-  static final Color bottomAppBarUnselectedColorLight = backgroundDark.withOpacity(0.7);
-  static const Color bottomAppBarSelectedColorDark = backgroundLight;
-  static final Color bottomAppBarUnselectedColorDark = backgroundLight.withOpacity(0.7);
+  static const Color bottomAppBarSelectedLight = backgroundDark;
+  static final Color bottomAppBarUnselectedLight = backgroundDark.withOpacity(0.7);
+  static const Color bottomAppBarSelectedDark = backgroundLight;
+  static final Color bottomAppBarUnselectedDark = backgroundLight.withOpacity(0.7);
 
   // Text Colors
   static const Color textTitleLight = Color.fromRGBO(0, 0, 0, 0.88); // rgba(0, 0, 0, 0.88);

@@ -33,6 +33,7 @@ class UiSizes {
   // NavigationBar
   static const double navigationBarHeight = 64.0;
   static const double navigationBarMiddleBtnHeight = 54.0;
+  static const double navigationBarIconSize = 24.0;
 
   // BottomAppBar
   static const double bottomAppBarHeight = 64.0;

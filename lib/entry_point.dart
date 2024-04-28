@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:snapvids_app/common/styles/font_styles.dart';
 import 'package:snapvids_app/features/short_video/screens/creation/creation.dart';
 import 'package:snapvids_app/features/short_video/screens/discover/discover.dart';
@@ -36,6 +35,15 @@ class NavigationMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorFilter bottomAppBarUnselectedColor = ColorFilter.mode(
+      context.colorExtension.bottomAppBarUnselected!,
+      BlendMode.srcIn,
+    );
+    final ColorFilter bottomAppBarSelectedColor = ColorFilter.mode(
+      context.colorExtension.bottomAppBarSelected!,
+      BlendMode.srcIn,
+    );
+
     final controller = Get.put(NavigationController());
 
     Future openCreationScreen(context) {
@@ -66,14 +74,30 @@ class NavigationMenu extends StatelessWidget {
           onDestinationSelected: (index) => controller.selectedIndex.value = index,
           destinations: [
             MessageNavigationDestination(
-              icon: Iconsax.home,
-              selectedIcon: Iconsax.home_15,
+              icon: SvgPicture.asset(
+                ImageAssets.navHome,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarUnselectedColor,
+              ),
+              selectedIcon: SvgPicture.asset(
+                ImageAssets.navHomeSelected,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarSelectedColor,
+              ),
               label: UiTexts.menuHome,
               count: controller.homeCount.value,
             ),
             MessageNavigationDestination(
-              icon: Iconsax.category,
-              selectedIcon: Iconsax.category5,
+              icon: SvgPicture.asset(
+                ImageAssets.navDiscover,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarUnselectedColor,
+              ),
+              selectedIcon: SvgPicture.asset(
+                ImageAssets.navDiscoverSelected,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarSelectedColor,
+              ),
               label: UiTexts.menuDiscover,
               count: controller.discoverCount.value,
             ),
@@ -82,20 +106,36 @@ class NavigationMenu extends StatelessWidget {
               child: Container(
                 color: Colors.transparent,
                 child: SvgPicture.asset(
-                  ImageAssets.creation,
+                  ImageAssets.navCreation,
                   width: UiSizes.navigationBarMiddleBtnHeight,
                 ),
               ),
             ),
             MessageNavigationDestination(
-              icon: Iconsax.message,
-              selectedIcon: Iconsax.message5,
+              icon: SvgPicture.asset(
+                ImageAssets.navMessage,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarUnselectedColor,
+              ),
+              selectedIcon: SvgPicture.asset(
+                ImageAssets.navMessageSelected,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarSelectedColor,
+              ),
               label: UiTexts.menuMessage,
               count: controller.messageCount.value,
             ),
             MessageNavigationDestination(
-              icon: Iconsax.frame_14,
-              selectedIcon: Iconsax.frame5,
+              icon: SvgPicture.asset(
+                ImageAssets.navProfile,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarUnselectedColor,
+              ),
+              selectedIcon: SvgPicture.asset(
+                ImageAssets.navProfileSelected,
+                width: UiSizes.navigationBarIconSize,
+                colorFilter: bottomAppBarSelectedColor,
+              ),
               label: UiTexts.menuProfile,
               count: controller.profileCount.value,
             ),
@@ -116,8 +156,8 @@ class MessageNavigationDestination extends StatelessWidget {
     required this.count,
   });
 
-  final IconData icon;
-  final IconData selectedIcon;
+  final Widget icon;
+  final Widget selectedIcon;
   final String label;
   final int count;
 
@@ -139,7 +179,7 @@ class CountIcon extends StatelessWidget {
     required this.count,
   });
 
-  final IconData icon;
+  final Widget icon;
   final int count;
 
   @override
@@ -152,7 +192,7 @@ class CountIcon extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Icon(icon),
+        icon,
         Positioned(
           top: 0 - UiSizes.messagePromptCircle / 4,
           right: 0 - UiSizes.messagePromptCircle / 4,
